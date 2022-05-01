@@ -2691,6 +2691,9 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     RIGHT: "right"
   };
   var current_direction = directions.RIGHT;
+  var run_action = false;
+  var snake_length = 3;
+  var snake_body = [];
   var map = addLevel([
     "==========================================",
     "=                                        =",
@@ -2740,4 +2743,28 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     pos: vec2(0, 0),
     "=": () => [rect(block_size, block_size), color(255, 0, 0), area(), "wall"]
   });
+  function respawn_snake() {
+    destroyAll("snake");
+    snake_body = [];
+    snake_length = 3;
+    for (let i = 1; i <= snake_length; i++) {
+      let segment = add([
+        rect(block_size, block_size),
+        pos(block_size, block_size * i),
+        color(0, 0, 255),
+        area(),
+        "snake"
+      ]);
+      snake_body.push(segment);
+    }
+    current_direction = directions.RIGHT;
+  }
+  function respawn_all() {
+    run_action = false;
+    wait(0.5, function() {
+      respawn_snake();
+      run_action = true;
+    });
+  }
+  respawn_all();
 })();
