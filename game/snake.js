@@ -292,10 +292,6 @@ onLoad(() => {
 
   document.querySelector("canvas").focus();
 });
-//########################################################  SCORE  ##############################################//
-// Once the snake dies, the final score is calculated based on the number of apples eaten by the snake.
-
-focus();
 
 //########################################################  IN GAME MENU  ##############################################//
 const escape = document.getElementById("in-game-escape");
