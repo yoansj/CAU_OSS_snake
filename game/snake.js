@@ -1,4 +1,6 @@
 import kaboom from "kaboom";
+import "/style.css";
+import "../index.css";
 
 kaboom();
 
@@ -16,7 +18,8 @@ let run_action = false;
 let snake_length = 3;
 let snake_body = [];
 
-loadSprite("grass", "../assets/grass.png");
+//########################################################  MAP CREATE  ##############################################//
+loadSprite("grass", "../sprites/grass.png");
 
 layers(["grass", "game"], "game");
 
@@ -124,6 +127,7 @@ onKeyPress("l", () => {
   loadGame();
 });
 
+//########################################################  SNAKE SPAWN  ##############################################//
 function respawn_snake() {
   destroyAll("snake");
 
@@ -158,6 +162,7 @@ function respawn_all() {
 
 respawn_all();
 
+//########################################################  SNAKE MOVE  ##############################################//
 // The snake moves only north, south, east, or west.
 onKeyPress("up", () => {
   if (current_direction != directions.DOWN) {
@@ -185,7 +190,6 @@ onKeyPress("right", () => {
 
 let move_delay = 0.1; // The snake moves at a constant speed.
 let timer = 0;
-let onPause = false;
 onUpdate(() => {
   if (!run_action) return;
   timer += dt();
@@ -233,6 +237,7 @@ onUpdate(() => {
   }
 });
 
+//########################################################  FOOD SPAWN  ##############################################//
 let food = null;
 loadSprite("apple", "../assets/gameapple.png");
 
@@ -250,6 +255,7 @@ function respawn_food() {
   food = add([sprite("apple"), pos(new_pos), area(), "food"]);
 }
 
+//########################################################  COLLIDE  ##############################################//
 // When the snake "eats" (runs into) an apple, it gets longer.
 onCollide("snake", "food", (s, f) => {
   snake_length++;
@@ -295,10 +301,46 @@ onLoad(() => {
 
   document.querySelector("canvas").focus();
 });
+//########################################################  SCORE  ##############################################//
 // Once the snake dies, the final score is calculated based on the number of apples eaten by the snake.
+
+
+focus();
+
+
+//########################################################  IN GAME MENU  ##############################################//
+const escape = document.getElementById('in-game-escape');
+let onPause = false;
+
+escape.style.display = 'none';
 
 onKeyPress('escape', () => {
   onPause = !onPause;
+  if (onPause) {
+    escape.style.display = 'block';
+  } else {
+    escape.style.display = 'none';
+  }
 })
 
 focus();
+document.getElementById("button-resume").onclick = function () {
+  onPause = false;
+  escape.style.display = 'none';
+  focus();
+};
+
+document.getElementById("button-restart").onclick = function () {
+  onPause = false;
+  escape.style.display = 'none';
+  respawn_all();
+  focus();
+};
+
+document.getElementById("button-save").onclick = function () {
+  window.location.href = "/";
+};
+
+document.getElementById("button-exit").onclick = function () {
+  window.location.href = "/";
+};

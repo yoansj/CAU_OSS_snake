@@ -13,3 +13,6 @@ document.getElementById("button-continu").onclick = function () {
   localStorage.setItem("cau-snake-needs-load", JSON.stringify(true));
   window.location.href = "/game/";
 };
+document.getElementById("button-exit-window").onclick = function () {
+
+};
