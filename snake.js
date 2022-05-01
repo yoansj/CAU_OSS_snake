@@ -97,3 +97,27 @@ function respawn_all() {
 }
 
 respawn_all();
+
+onKeyPress("up", () => {
+  if (current_direction != directions.DOWN) {
+    current_direction = directions.UP;
+  }
+});
+
+onKeyPress("down", () => {
+  if (current_direction != directions.UP) {
+    current_direction = directions.DOWN;
+  }
+});
+
+onKeyPress("left", () => {
+  if (current_direction != directions.RIGHT) {
+    current_direction = directions.LEFT;
+  }
+});
+
+onKeyPress("right", () => {
+  if (current_direction != directions.LEFT) {
+    current_direction = directions.RIGHT;
+  }
+});
