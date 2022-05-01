@@ -76,6 +76,54 @@ const map = addLevel(
   }
 );
 
+// Once the snake dies, the final score is calculated based on the number of apples eaten by the snake.
+const score = add([text("Score: 0"), pos(block_size * 45, block_size * 1), { value: 0 }]);
+
+const saveGame = () => {
+  localStorage.setItem(
+    "cau-snake-save",
+    JSON.stringify({
+      snake_length,
+      score: score.value,
+    })
+  );
+  window.location.href = "/";
+};
+
+const loadGame = () => {
+  const data = JSON.parse(localStorage.getItem("cau-snake-save"));
+
+  if (data) {
+    destroyAll("snake");
+    score.value = data.score;
+    snake_body = [];
+    snake_length = data.snake_length;
+
+    let mapCenter = block_size * 20;
+
+    for (let i = 1; i <= snake_length; i++) {
+      let segment = add([
+        rect(block_size, block_size),
+        pos(mapCenter, mapCenter - block_size * i),
+        color(173, 216, 230),
+        area(),
+        "snake",
+      ]);
+      snake_body.push(segment);
+    }
+    current_direction = directions.UP;
+    score.text = "Score:" + score.value;
+  }
+};
+
+onKeyPress("s", () => {
+  saveGame();
+});
+
+onKeyPress("l", () => {
+  loadGame();
+});
+
 function respawn_snake() {
   destroyAll("snake");
 
@@ -208,22 +256,27 @@ onCollide("snake", "food", (s, f) => {
   respawn_food();
 });
 
+const goToScores = () => {
+  wait(1.5, () => {
+    localStorage.setItem("cau-snake-lastScore", JSON.stringify(score.value));
+    window.location.href = "/scores/";
+  });
+};
+
 // The game continues until the snake "dies".
 // The snake dies by either (1) running into the edge of the board, or (2) by running into its own body.
 onCollide("snake", "wall", (s, w) => {
   run_action = false;
   shake(12);
-  respawn_all();
+  goToScores();
 });
 
 onCollide("snake", "snake", (s, t) => {
   run_action = false;
   shake(12);
   respawn_all();
+  goToScores();
 });
-
-// Once the snake dies, the final score is calculated based on the number of apples eaten by the snake.
-const score = add([text("Score: 0"), pos(block_size * 45, block_size * 1), { value: 0 }]);
 
 const body = document.querySelector("body");
 body.style = "overflow: hidden;";

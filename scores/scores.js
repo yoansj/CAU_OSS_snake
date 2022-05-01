@@ -8,11 +8,15 @@ const replayButton = document.getElementById("replay-button");
 const menuButton = document.getElementById("menu-button");
 const scoreText = document.getElementById("score-text");
 
-const lastScore = JSON.parse(localStorage.getItem("cau-snake-lastScore")) || Math.round(Math.random() * 100);
-let canSubmitScore = true;
+const lastScore = JSON.parse(localStorage.getItem("cau-snake-lastScore")) || -42;
 
-// Update UI
-scoreText.innerHTML = "Your score for this game is: " + lastScore;
+let canSubmitScore = true;
+if (lastScore === -42) {
+  scoreText.innerHTML = "";
+  canSubmitScore = false;
+} else {
+  scoreText.innerHTML = "Your score for this game is: " + lastScore;
+}
 
 /**
  * Load scores from user computer
@@ -82,7 +86,7 @@ updateBoard(scores);
  * Updates the score board
  */
 const submitScore = () => {
-  if (input.value !== "" && canSubmitScore) {
+  if (input.value !== "" && canSubmitScore && lastScore > 0) {
     scores.push({
       name: input.value,
       score: lastScore,
@@ -92,6 +96,8 @@ const submitScore = () => {
     updateBoard(scores);
     canSubmitScore = false;
     scoreText.innerHTML = "Your score is saved :)";
+    localStorage.setItem("cau-snake-lastScore", JSON.stringify(-42));
+    input.value = "";
   }
 };
 
