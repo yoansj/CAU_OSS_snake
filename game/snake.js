@@ -185,6 +185,7 @@ onKeyPress("right", () => {
 
 let move_delay = 0.1; // The snake moves at a constant speed.
 let timer = 0;
+let onPause = false;
 onUpdate(() => {
   if (!run_action) return;
   timer += dt();
@@ -193,7 +194,8 @@ onUpdate(() => {
 
   let move_x = 0;
   let move_y = 0;
-
+  if (onPause)
+    return;
   switch (current_direction) {
     case directions.DOWN:
       move_x = 0;
@@ -293,3 +295,10 @@ onLoad(() => {
 
   document.querySelector("canvas").focus();
 });
+// Once the snake dies, the final score is calculated based on the number of apples eaten by the snake.
+
+onKeyPress('escape', () => {
+  onPause = !onPause;
+})
+
+focus();
