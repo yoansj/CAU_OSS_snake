@@ -2857,4 +2857,9 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     shake(12);
     respawn_all();
   });
+  onCollide("snake", "snake", (s, t) => {
+    run_action = false;
+    shake(12);
+    respawn_all();
+  });
 })();

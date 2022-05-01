@@ -204,3 +204,9 @@ onCollide("snake", "wall", (s, w) => {
   shake(12);
   respawn_all();
 });
+
+onCollide("snake", "snake", (s, t) => {
+  run_action = false;
+  shake(12);
+  respawn_all();
+});
