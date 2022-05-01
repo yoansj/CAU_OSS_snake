@@ -119,14 +119,6 @@ const loadGame = () => {
   }
 };
 
-onKeyPress("s", () => {
-  saveGame();
-});
-
-onKeyPress("l", () => {
-  loadGame();
-});
-
 //########################################################  SNAKE SPAWN  ##############################################//
 function respawn_snake() {
   destroyAll("snake");
@@ -198,8 +190,7 @@ onUpdate(() => {
 
   let move_x = 0;
   let move_y = 0;
-  if (onPause)
-    return;
+  if (onPause) return;
   switch (current_direction) {
     case directions.DOWN:
       move_x = 0;
@@ -304,41 +295,39 @@ onLoad(() => {
 //########################################################  SCORE  ##############################################//
 // Once the snake dies, the final score is calculated based on the number of apples eaten by the snake.
 
-
 focus();
 
-
 //########################################################  IN GAME MENU  ##############################################//
-const escape = document.getElementById('in-game-escape');
+const escape = document.getElementById("in-game-escape");
 let onPause = false;
 
-escape.style.display = 'none';
+escape.style.display = "none";
 
-onKeyPress('escape', () => {
+onKeyPress("escape", () => {
   onPause = !onPause;
   if (onPause) {
-    escape.style.display = 'block';
+    escape.style.display = "block";
   } else {
-    escape.style.display = 'none';
+    escape.style.display = "none";
   }
-})
+});
 
 focus();
 document.getElementById("button-resume").onclick = function () {
   onPause = false;
-  escape.style.display = 'none';
+  escape.style.display = "none";
   focus();
 };
 
 document.getElementById("button-restart").onclick = function () {
   onPause = false;
-  escape.style.display = 'none';
+  escape.style.display = "none";
   respawn_all();
   focus();
 };
 
 document.getElementById("button-save").onclick = function () {
-  window.location.href = "/";
+  saveGame();
 };
 
 document.getElementById("button-exit").onclick = function () {
