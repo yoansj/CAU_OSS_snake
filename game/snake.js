@@ -19,7 +19,7 @@ let snake_length = 3;
 let snake_body = [];
 
 //########################################################  MAP CREATE  ##############################################//
-loadSprite("grass", "../assets/grass.png");
+loadSprite("grass", "/assets/grass.png");
 
 layers(["grass", "game"], "game");
 
@@ -230,7 +230,7 @@ onUpdate(() => {
 
 //########################################################  FOOD SPAWN  ##############################################//
 let food = null;
-loadSprite("apple", "../assets/gameapple.png");
+loadSprite("apple", "/assets/gameapple.png");
 
 // An apple appears at a random location (but the location where the snake can reach).
 // There is always exactly one apple visible at any given time.
