@@ -2764,6 +2764,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     run_action = false;
     wait(0.5, function() {
       respawn_snake();
+      respawn_food();
       run_action = true;
     });
   }
@@ -2830,4 +2831,21 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       destroy(tail);
     }
   });
+  var food = null;
+  function respawn_food() {
+    let new_pos = rand(vec2(1, 1), vec2(40, 40));
+    new_pos.x = Math.floor(new_pos.x);
+    new_pos.y = Math.floor(new_pos.y);
+    new_pos = new_pos.scale(block_size);
+    if (food) {
+      destroy(food);
+    }
+    food = add([
+      rect(block_size, block_size),
+      color(0, 255, 0),
+      pos(new_pos),
+      area(),
+      "food"
+    ]);
+  }
 })();
