@@ -19,7 +19,7 @@ let snake_length = 3;
 let snake_body = [];
 
 //########################################################  MAP CREATE  ##############################################//
-loadSprite("grass", "../sprites/grass.png");
+loadSprite("grass", "../assets/grass.png");
 
 layers(["grass", "game"], "game");
 
