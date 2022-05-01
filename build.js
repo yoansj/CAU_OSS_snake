@@ -2683,12 +2683,61 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
 
   // snake.js
   no();
-  add([
-    text("hello"),
-    pos(120, 80)
-  ]);
-  onClick(() => {
-    addKaboom(mousePos());
+  var block_size = 20;
+  var directions = {
+    UP: "up",
+    DOWN: "down",
+    LEFT: "left",
+    RIGHT: "right"
+  };
+  var current_direction = directions.RIGHT;
+  var map = addLevel([
+    "==========================================",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=                                        =",
+    "=========================================="
+  ], {
+    width: block_size,
+    height: block_size,
+    pos: vec2(0, 0),
+    "=": () => [rect(block_size, block_size), color(255, 0, 0), area(), "wall"]
   });
-  onKeyPress("b", burp);
 })();
