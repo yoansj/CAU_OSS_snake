@@ -16,6 +16,12 @@ let run_action = false;
 let snake_length = 3;
 let snake_body = [];
 
+loadSprite("grass", "../sprites/grass.png");
+
+layers(["grass", "game"], "game");
+
+add([sprite("grass"), layer("grass")]);
+
 // The size of the board is 40 x 40.
 const map = addLevel(
   [
@@ -82,7 +88,7 @@ function respawn_snake() {
     let segment = add([
       rect(block_size, block_size),
       pos(mapCenter, mapCenter - block_size * i), // The snake starts at the center of the board.
-      color(0, 0, 255),
+      color(173, 216, 230),
       area(),
       "snake",
     ]);
@@ -165,7 +171,7 @@ onUpdate(() => {
     add([
       rect(block_size, block_size),
       pos(snake_head.pos.x + move_x, snake_head.pos.y + move_y),
-      color(0, 0, 255),
+      color(173, 216, 230),
       area(),
       "snake",
     ])
@@ -178,6 +184,7 @@ onUpdate(() => {
 });
 
 let food = null;
+loadSprite("apple", "../sprites/apple.png");
 
 // An apple appears at a random location (but the location where the snake can reach).
 // There is always exactly one apple visible at any given time.
@@ -190,13 +197,7 @@ function respawn_food() {
   if (food) {
     destroy(food);
   }
-  food = add([
-    rect(block_size, block_size),
-    color(0, 255, 0),
-    pos(new_pos),
-    area(),
-    "food",
-  ]);
+  food = add([sprite("apple"), pos(new_pos), area(), "food"]);
 }
 
 // When the snake "eats" (runs into) an apple, it gets longer.
