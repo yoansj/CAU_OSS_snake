@@ -2751,14 +2751,14 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     for (let i = 1; i <= snake_length; i++) {
       let segment = add([
         rect(block_size, block_size),
-        pos(mapCenter, mapCenter + block_size * i),
+        pos(mapCenter, mapCenter - block_size * i),
         color(0, 0, 255),
         area(),
         "snake"
       ]);
       snake_body.push(segment);
     }
-    current_direction = directions.RIGHT;
+    current_direction = directions.UP;
   }
   function respawn_all() {
     run_action = false;

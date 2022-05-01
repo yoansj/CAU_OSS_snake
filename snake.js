@@ -80,14 +80,14 @@ function respawn_snake() {
   for (let i = 1; i <= snake_length; i++) {
     let segment = add([
       rect(block_size, block_size),
-      pos(mapCenter, mapCenter + block_size * i),
+      pos(mapCenter, mapCenter - block_size * i),
       color(0, 0, 255),
       area(),
       "snake",
     ]);
     snake_body.push(segment);
   }
-  current_direction = directions.RIGHT;
+  current_direction = directions.UP;
 }
 
 function respawn_all() {
