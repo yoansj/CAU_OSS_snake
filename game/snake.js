@@ -16,6 +16,7 @@ let run_action = false;
 let snake_length = 3;
 let snake_body = [];
 
+// The size of the board is 40 x 40.
 const map = addLevel(
   [
     "==========================================",
@@ -67,7 +68,7 @@ const map = addLevel(
     pos: vec2(0, 0),
     "=": () => [rect(block_size, block_size), color(255, 0, 0), area(), "wall"],
   }
-); // Map of 40*40
+);
 
 function respawn_snake() {
   destroyAll("snake");
@@ -80,14 +81,14 @@ function respawn_snake() {
   for (let i = 1; i <= snake_length; i++) {
     let segment = add([
       rect(block_size, block_size),
-      pos(mapCenter, mapCenter - block_size * i),
+      pos(mapCenter, mapCenter - block_size * i), // The snake starts at the center of the board.
       color(0, 0, 255),
       area(),
       "snake",
     ]);
     snake_body.push(segment);
   }
-  current_direction = directions.UP;
+  current_direction = directions.UP; // The snake starts moving north (upward)
 }
 
 function respawn_all() {
@@ -101,6 +102,7 @@ function respawn_all() {
 
 respawn_all();
 
+// The snake moves only north, south, east, or west.
 onKeyPress("up", () => {
   if (current_direction != directions.DOWN) {
     current_direction = directions.UP;
@@ -125,7 +127,7 @@ onKeyPress("right", () => {
   }
 });
 
-let move_delay = 0.1;
+let move_delay = 0.1; // The snake moves at a constant speed.
 let timer = 0;
 onUpdate(() => {
   if (!run_action) return;
@@ -155,7 +157,6 @@ onUpdate(() => {
       break;
   }
 
-  // Get the last element (the snake head)
   let snake_head = snake_body[snake_body.length - 1];
 
   snake_body.push(
@@ -169,13 +170,15 @@ onUpdate(() => {
   );
 
   if (snake_body.length > snake_length) {
-    let tail = snake_body.shift(); // Remove the last of the tail
+    let tail = snake_body.shift();
     destroy(tail);
   }
 });
 
 let food = null;
 
+// An apple appears at a random location (but the location where the snake can reach).
+// There is always exactly one apple visible at any given time.
 function respawn_food() {
   let new_pos = rand(vec2(1, 1), vec2(40, 40));
   new_pos.x = Math.floor(new_pos.x);
@@ -194,11 +197,14 @@ function respawn_food() {
   ]);
 }
 
+// When the snake "eats" (runs into) an apple, it gets longer.
 onCollide("snake", "food", (s, f) => {
   snake_length++;
   respawn_food();
 });
 
+// The game continues until the snake "dies".
+// The snake dies by either (1) running into the edge of the board, or (2) by running into its own body.
 onCollide("snake", "wall", (s, w) => {
   run_action = false;
   shake(12);
@@ -210,3 +216,5 @@ onCollide("snake", "snake", (s, t) => {
   shake(12);
   respawn_all();
 });
+
+let score = 0;
