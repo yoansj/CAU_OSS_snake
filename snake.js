@@ -67,7 +67,7 @@ const map = addLevel(
     pos: vec2(0, 0),
     "=": () => [rect(block_size, block_size), color(255, 0, 0), area(), "wall"],
   }
-);
+); // Map of 40*40
 
 function respawn_snake() {
   destroyAll("snake");
@@ -75,10 +75,12 @@ function respawn_snake() {
   snake_body = [];
   snake_length = 3;
 
+  let mapCenter = block_size * 20;
+
   for (let i = 1; i <= snake_length; i++) {
     let segment = add([
       rect(block_size, block_size),
-      pos(block_size, block_size * i),
+      pos(mapCenter, mapCenter + block_size * i),
       color(0, 0, 255),
       area(),
       "snake",

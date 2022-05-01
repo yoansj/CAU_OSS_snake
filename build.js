@@ -2747,10 +2747,11 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     destroyAll("snake");
     snake_body = [];
     snake_length = 3;
+    let mapCenter = block_size * 20;
     for (let i = 1; i <= snake_length; i++) {
       let segment = add([
         rect(block_size, block_size),
-        pos(block_size, block_size * i),
+        pos(mapCenter, mapCenter + block_size * i),
         color(0, 0, 255),
         area(),
         "snake"
