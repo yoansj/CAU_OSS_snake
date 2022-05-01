@@ -278,5 +278,18 @@ onCollide("snake", "snake", (s, t) => {
   goToScores();
 });
 
-const body = document.querySelector("body");
-body.style = "overflow: hidden;";
+onLoad(() => {
+  const body = document.querySelector("body");
+  body.style = "overflow: hidden;";
+
+  const loadGameData = JSON.parse(localStorage.getItem("cau-snake-needs-load"));
+
+  if (loadGameData === true) {
+    wait(0.5, () => {
+      loadGame();
+      localStorage.setItem("cau-snake-needs-load", JSON.stringify(false));
+    });
+  }
+
+  document.querySelector("canvas").focus();
+});
