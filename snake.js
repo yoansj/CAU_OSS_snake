@@ -2,14 +2,43 @@ import kaboom from "kaboom";
 
 kaboom();
 
-add([
-    text("hello"),
-    pos(120, 80),
-]);
+const block_size = 40;
 
-onClick(() => {
-    addKaboom(mousePos())
-})
+const directions = {
+    UP: "up",
+    DOWN: "down",
+    LEFT: "left",
+    RIGHT: "right"
+};
 
-// burp on "b"
-onKeyPress("b", burp)
+let current_direction = directions.RIGHT;
+let run_action = false;
+let snake_length = 3;
+let snake_body = [];
+
+const map = addLevel([
+    "==============",
+    "=            = ",
+    "=            = ",
+    "=            = ",
+    "=            = ",
+    "=            = ",
+    "=            = ",
+    "=            = ",
+    "=            = ",
+    "=            = ",
+    "=            = ",
+    "=            = ",
+    "=            = ",
+    "==============",
+], {
+    width: block_size,
+    height: block_size,
+    pos: vec2(0, 0),
+    "=": () => [
+        rect(block_size, block_size),
+        color(255, 0, 0),
+        area(),
+        "wall"
+    ]
+});
