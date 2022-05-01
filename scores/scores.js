@@ -5,6 +5,7 @@ const scoreTemplate = document.getElementById("score-template");
 const input = document.getElementById("name-input");
 const addScoreButton = document.getElementById("add-score");
 const replayButton = document.getElementById("replay-button");
+const menuButton = document.getElementById("menu-button");
 const scoreText = document.getElementById("score-text");
 
 const lastScore = JSON.parse(localStorage.getItem("cau-snake-lastScore")) || Math.round(Math.random() * 100);
@@ -104,3 +105,6 @@ const replay = () => {
 };
 
 replayButton.onclick = () => replay();
+menuButton.onclick = () => {
+  window.location.href = "/";
+};

@@ -3,9 +3,12 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Scores</title>
+  <title>Ranking</title>
 </head>
 
 <body>
@@ -26,7 +29,7 @@
           Score
         </h1>
       </div>
-      <div class="justify-around bg-green-600 hidden" id="score-template">
+      <div class="justify-between bg-green-600 hidden" id="score-template">
         <h1>
           1
         </h1>
@@ -50,7 +53,7 @@
       Your score for this game is: 642
     </p>
     <div id="buttons" class="flex justify-around w-full p-2">
-      <button class="bg-green-900 rounded-xl w-[45%] py-1">
+      <button class="bg-green-900 rounded-xl w-[45%] py-1" id="menu-button">
         Menu
       </button>
       <button class="bg-green-600 rounded-xl w-[45%] py-1" id="replay-button">

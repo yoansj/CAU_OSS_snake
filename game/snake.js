@@ -16,7 +16,7 @@ let run_action = false;
 let snake_length = 3;
 let snake_body = [];
 
-loadSprite("grass", "../sprites/grass.png");
+loadSprite("grass", "../assets/grass.png");
 
 layers(["grass", "game"], "game");
 
@@ -184,7 +184,7 @@ onUpdate(() => {
 });
 
 let food = null;
-loadSprite("apple", "../sprites/apple.png");
+loadSprite("apple", "../assets/gameapple.png");
 
 // An apple appears at a random location (but the location where the snake can reach).
 // There is always exactly one apple visible at any given time.
@@ -223,8 +223,7 @@ onCollide("snake", "snake", (s, t) => {
 });
 
 // Once the snake dies, the final score is calculated based on the number of apples eaten by the snake.
-const score = add([
-  text("Score: 0"),
-  pos(block_size * 45, block_size * 1),
-  { value: 0 },
-]);
+const score = add([text("Score: 0"), pos(block_size * 45, block_size * 1), { value: 0 }]);
+
+const body = document.querySelector("body");
+body.style = "overflow: hidden;";
