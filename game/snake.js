@@ -96,6 +96,8 @@ function respawn_all() {
   wait(0.5, function () {
     respawn_snake();
     respawn_food();
+    score.value = 0;
+    score.text = "Score:" + score.value;
     run_action = true;
   });
 }
@@ -200,6 +202,8 @@ function respawn_food() {
 // When the snake "eats" (runs into) an apple, it gets longer.
 onCollide("snake", "food", (s, f) => {
   snake_length++;
+  score.value++;
+  score.text = "Score:" + score.value;
   respawn_food();
 });
 
@@ -217,4 +221,9 @@ onCollide("snake", "snake", (s, t) => {
   respawn_all();
 });
 
-let score = 0;
+// Once the snake dies, the final score is calculated based on the number of apples eaten by the snake.
+const score = add([
+  text("Score: 0"),
+  pos(block_size * 45, block_size * 1),
+  { value: 0 },
+]);
