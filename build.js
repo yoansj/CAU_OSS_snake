@@ -2789,7 +2789,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       current_direction = directions.RIGHT;
     }
   });
-  var move_delay = 0.2;
+  var move_delay = 0.1;
   var timer = 0;
   onUpdate(() => {
     if (!run_action)
@@ -2848,4 +2848,8 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       "food"
     ]);
   }
+  onCollide("snake", "food", (s, f2) => {
+    snake_length++;
+    respawn_food();
+  });
 })();

@@ -125,7 +125,7 @@ onKeyPress("right", () => {
   }
 });
 
-let move_delay = 0.2;
+let move_delay = 0.1;
 let timer = 0;
 onUpdate(() => {
   if (!run_action) return;
@@ -193,3 +193,8 @@ function respawn_food() {
     "food",
   ]);
 }
+
+onCollide("snake", "food", (s, f) => {
+  snake_length++;
+  respawn_food();
+});
