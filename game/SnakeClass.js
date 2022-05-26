@@ -27,13 +27,6 @@ export default class Snake {
     this.goToScores = () => {};
     // Functions to call
 
-    // When the snake "eats" (runs into) an apple, it gets longer.
-    onCollide(this.name, "food", (s, f) => {
-      this.length++;
-      this.score++;
-      this.respawnFood();
-    });
-
     // Collision with wall
     onCollide(this.name, "wall", (s, w) => {
       this.running = false;
