@@ -13,26 +13,50 @@ const directions = {
   RIGHT: "right",
 };
 
-const block_size = 20;
+const block_size = 15;
 
 const player1 = new Snake(directions.RIGHT, 3, "player1", block_size);
 const player2 = new Snake(directions.RIGHT, 3, "player2", block_size);
 const apple1 = new Apple(block_size, "apple");
+const apple2 = new Apple(block_size, "apple2");
+const scorePlayer1 = add([text("Score: 0", {size: 25, width: 320}), pos(block_size * 84, block_size * 1), { value: 0 }]);
+const scorePlayer2 = add([text("Score: 0", {size: 25, width: 320 }), pos(block_size * 84, block_size * 20), { value: 0 }]);
 
 // When the snake "eats" (runs into) an apple, it gets longer.
 onCollide("player1", "apple", (s, f) => {
   player1.length++;
   player1.score++;
+  scorePlayer1.value++;
+  scorePlayer1.text = "Score player 1:" + scorePlayer1.value;
   apple1.respawn_food();
 });
 
-const apple2 = new Apple(block_size, "apple2");
 
 onCollide("player1", "apple2", (s, f) => {
   player1.length++;
   player1.score++;
+  scorePlayer1.value++;
+  scorePlayer1.text = "Score player 1:" + scorePlayer1.value;
   apple2.respawn_food();
 });
+
+onCollide("player2", "apple", (s, f) => {
+  player2.length++;
+  player2.score++;
+  scorePlayer2.value++;
+  scorePlayer2.text = "Score player 2:" + scorePlayer2.value;
+  apple1.respawn_food();
+});
+
+
+onCollide("player2", "apple2", (s, f) => {
+  player2.length++;
+  player2.score++;
+  scorePlayer2.value++;
+  scorePlayer2.text = "Score player 2:" + scorePlayer2.value;
+  apple2.respawn_food();
+});
+
 
 //########################################################  MAP CREATE  ##############################################//
 loadSprite("grass", "/assets/grass.png");
@@ -96,7 +120,6 @@ const map = addLevel(
 );
 
 // Once the snake dies, the final score is calculated based on the number of apples eaten by the snake.
-const score = add([text("Score: 0"), pos(block_size * 45, block_size * 1), { value: 0 }]);
 
 const saveGame = () => {
   localStorage.setItem(
@@ -147,8 +170,10 @@ function respawn_all() {
     apple2.respawn_food();
     player1.respawn(directions.UP);
     player2.respawn(directions.RIGHT);
-    score.value = 0;
-    score.text = "Score:" + score.value;
+    scorePlayer1.value = 0;
+    scorePlayer2.value = 0;
+    scorePlayer1.text = "Score player 1:" + scorePlayer1.value;
+    scorePlayer2.text = "Score player 2:" + scorePlayer2.value;
   });
 }
 
