@@ -16,8 +16,23 @@ const directions = {
 const block_size = 20;
 
 const player1 = new Snake(directions.RIGHT, 3, "player1", block_size);
-const apple1 = new Apple(block_size);
-// const apple2 = new Apple(block_size, "apple2");
+const player2 = new Snake(directions.RIGHT, 3, "player2", block_size);
+const apple1 = new Apple(block_size, "apple");
+
+// When the snake "eats" (runs into) an apple, it gets longer.
+onCollide("player1", "apple", (s, f) => {
+  player1.length++;
+  player1.score++;
+  apple1.respawn_food();
+});
+
+const apple2 = new Apple(block_size, "apple2");
+
+onCollide("player1", "apple2", (s, f) => {
+  player1.length++;
+  player1.score++;
+  apple2.respawn_food();
+});
 
 //########################################################  MAP CREATE  ##############################################//
 loadSprite("grass", "/assets/grass.png");
@@ -124,9 +139,14 @@ const loadGame = () => {
 function respawn_all() {
   player1.running = false;
   player1.spawned = false;
+
+  player2.running = false;
+  player2.spawned = false;
   wait(0.5, function () {
     apple1.respawn_food();
+    apple2.respawn_food();
     player1.respawn(directions.UP);
+    player2.respawn(directions.RIGHT);
     score.value = 0;
     score.text = "Score:" + score.value;
   });
@@ -134,23 +154,19 @@ function respawn_all() {
 
 respawn_all();
 
-//########################################################  SNAKE MOVE  ##############################################//
-// The snake moves only north, south, east, or west.
-onKeyPress("up", () => {
-  player1.changeDirection("up");
-});
+// Player 1 Move //
+onKeyPress("up", () => player1.changeDirection("up"));
+onKeyPress("down", () => player1.changeDirection("down"));
+onKeyPress("left", () => player1.changeDirection("left"));
+onKeyPress("right", () => player1.changeDirection("right"));
+// Player 1 Move //
 
-onKeyPress("down", () => {
-  player1.changeDirection("down");
-});
-
-onKeyPress("left", () => {
-  player1.changeDirection("left");
-});
-
-onKeyPress("right", () => {
-  player1.changeDirection("right");
-});
+// Player 2 Move //
+onKeyPress("w", () => player2.changeDirection("up"));
+onKeyPress("s", () => player2.changeDirection("down"));
+onKeyPress("a", () => player2.changeDirection("left"));
+onKeyPress("d", () => player2.changeDirection("right"));
+// Player 2 Move //
 
 let move_delay = 0.035; // The snake moves at a constant speed.
 let timer = 0;
@@ -160,6 +176,7 @@ onUpdate(() => {
   if (timer < move_delay) return;
   timer = 0;
   player1.update();
+  player2.update();
 });
 
 //########################################################  FOOD SPAWN  ##############################################//
