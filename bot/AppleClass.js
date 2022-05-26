@@ -12,6 +12,7 @@ export default class Apple {
     this.new_pos.x = Math.floor(this.new_pos.x);
     this.new_pos.y = Math.floor(this.new_pos.y);
     this.new_pos = this.new_pos.scale(this.block_size);
+    console.log('new_pos => ', this.new_pos);
     destroyAll(this.name);
     let newFood = add([sprite("apple"), pos(this.new_pos), area(), this.name]);
     this.food = newFood;
