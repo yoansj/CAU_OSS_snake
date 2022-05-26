@@ -4,7 +4,7 @@ import "../index.css";
 
 kaboom();
 
-const block_size = 20;
+const block_size = 15;
 
 const directions = {
   UP: "up",
