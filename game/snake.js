@@ -15,12 +15,27 @@ const directions = {
 
 const block_size = 15;
 
-const player1 = new Snake(directions.RIGHT, 3, "player1", block_size);
-const player2 = new Snake(directions.RIGHT, 3, "player2", block_size);
+const player1 = new Snake(directions.RIGHT, 3, "player1", block_size, {
+  x: block_size * 2,
+  y: block_size * 14,
+});
+const player2 = new Snake(directions.LEFT, 3, "player2", block_size, {
+  x: block_size * 79,
+  y: block_size * 14,
+});
+
 const apple1 = new Apple(block_size, "apple");
 const apple2 = new Apple(block_size, "apple2");
-const scorePlayer1 = add([text("Score: 0", {size: 25, width: 320}), pos(block_size * 84, block_size * 1), { value: 0 }]);
-const scorePlayer2 = add([text("Score: 0", {size: 25, width: 320 }), pos(block_size * 84, block_size * 20), { value: 0 }]);
+const scorePlayer1 = add([
+  text("Score: 0", { size: 25, width: 320 }),
+  pos(block_size * 84, block_size * 1),
+  { value: 0 },
+]);
+const scorePlayer2 = add([
+  text("Score: 0", { size: 25, width: 320 }),
+  pos(block_size * 84, block_size * 20),
+  { value: 0 },
+]);
 
 // When the snake "eats" (runs into) an apple, it gets longer.
 onCollide("player1", "apple", (s, f) => {
@@ -30,7 +45,6 @@ onCollide("player1", "apple", (s, f) => {
   scorePlayer1.text = "Score player 1:" + scorePlayer1.value;
   apple1.respawn_food();
 });
-
 
 onCollide("player1", "apple2", (s, f) => {
   player1.length++;
@@ -48,7 +62,6 @@ onCollide("player2", "apple", (s, f) => {
   apple1.respawn_food();
 });
 
-
 onCollide("player2", "apple2", (s, f) => {
   player2.length++;
   player2.score++;
@@ -56,7 +69,6 @@ onCollide("player2", "apple2", (s, f) => {
   scorePlayer2.text = "Score player 2:" + scorePlayer2.value;
   apple2.respawn_food();
 });
-
 
 //########################################################  MAP CREATE  ##############################################//
 loadSprite("grass", "/assets/grass.png");
@@ -168,8 +180,8 @@ function respawn_all() {
   wait(0.5, function () {
     apple1.respawn_food();
     apple2.respawn_food();
-    player1.respawn(directions.UP);
-    player2.respawn(directions.RIGHT);
+    player1.respawn(directions.DOWN);
+    player2.respawn(directions.DOWN);
     scorePlayer1.value = 0;
     scorePlayer2.value = 0;
     scorePlayer1.text = "Score player 1:" + scorePlayer1.value;

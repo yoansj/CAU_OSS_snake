@@ -9,7 +9,7 @@ const directions = {
  * Represents a snake
  */
 export default class Snake {
-  constructor(direction, length, name, block_size) {
+  constructor(direction, length, name, block_size, pos) {
     // Snake member variables
     this.current_direction = direction;
     this.length = length;
@@ -20,6 +20,7 @@ export default class Snake {
     this.move_delay = 0.1;
     this.block_size = block_size;
     this.spawned = false;
+    this.pos = pos;
     // Snake member variables
 
     // Functions to call
@@ -51,12 +52,10 @@ export default class Snake {
     this.body = [];
     this.length = 3;
 
-    let mapCenter = this.block_size * 20;
-
     for (let i = 1; i <= this.length; i++) {
       let segment = add([
         rect(this.block_size, this.block_size),
-        pos(mapCenter, mapCenter - this.block_size * i), // The snake starts at the center of the board.
+        pos(this.pos.x, this.pos.y + this.block_size * i),
         color(173, 216, 230),
         area(),
         this.name,
