@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game page</title>
+</head>
+
+<body>
+  <div id="in-game-escape" class="absolute h-full w-full bg-black/70">
+    <div class="flex flex-col h-full w-full items-center">
+      <div class="menu-title my-10">
+        <img class="title-img" src="../assets/snake-title.png" alt="snake-title">
+        <img class="apple-img" src="../assets/apple.png" alt="apple">
+      </div>
+      <div class="menu">
+        <button id="button-resume" class="menu-button">Resume</button>
+        <button id="button-restart" class="menu-button">Restart</button>
+        <button id="button-save" class="menu-button">Save</button>
+        <button id="button-exit" class="menu-button">Exit</button>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="./snake.js"></script>
+</body>
+
+</html>

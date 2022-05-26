@@ -10,7 +10,7 @@ document.getElementById("button-dual-play").onclick = function () {
 };
 
 document.getElementById("button-auto-play").onclick = function () {
-  window.location.href = "/game/";
+  window.location.href = "/bot/";
 };
 
 document.getElementById("button-ranking").onclick = function () {
