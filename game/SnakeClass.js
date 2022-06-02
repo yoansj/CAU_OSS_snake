@@ -1,8 +1,8 @@
 const directions = {
-  UP: "up",
-  DOWN: "down",
-  LEFT: "left",
-  RIGHT: "right",
+  UP: 'up',
+  DOWN: 'down',
+  LEFT: 'left',
+  RIGHT: 'right',
 };
 
 /**
@@ -25,11 +25,18 @@ export default class Snake {
 
     // Functions to call
     this.respawnFood = () => {};
-    this.goToScores = () => {};
+    this.goToScores = () => {
+      const escape = document.getElementById('in-game-escape');
+      if (this.name === 'player1')
+        setTimeout(() => {
+          window.alert('Score: ' + this.score);
+          escape.style.display = 'block';
+        }, 1000);
+    };
     // Functions to call
 
     // Collision with wall
-    onCollide(this.name, "wall", (s, w) => {
+    onCollide(this.name, 'wall', (s, w) => {
       this.running = false;
       shake(12);
       this.goToScores();
