@@ -2,7 +2,7 @@ import "./index.css";
 import "./style.css";
 
 document.getElementById("button-new-game").onclick = function () {
-  window.location.href = "/single/";
+  window.location.href = "/game/";
 };
 
 document.getElementById("button-dual-play").onclick = function () {
