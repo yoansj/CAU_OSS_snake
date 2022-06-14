@@ -16,11 +16,11 @@ const directions = {
 const block_size = 15;
 
 const player1 = new Snake(directions.RIGHT, 3, "player1", block_size, {
-  x: block_size * 2,
+  x: block_size * 79,
   y: block_size * 14,
 });
 const player2 = new Snake(directions.LEFT, 3, "player2", block_size, {
-  x: block_size * 79,
+  x: block_size * 2,
   y: block_size * 14,
 });
 
@@ -192,17 +192,17 @@ function respawn_all() {
 respawn_all();
 
 // Player 1 Move //
-onKeyPress("w", () => player1.changeDirection("up"));
-onKeyPress("a", () => player1.changeDirection("down"));
-onKeyPress("s", () => player1.changeDirection("left"));
-onKeyPress("d", () => player1.changeDirection("right"));
+onKeyPress("up", () => player1.changeDirection("up"));
+onKeyPress("down", () => player1.changeDirection("down"));
+onKeyPress("left", () => player1.changeDirection("left"));
+onKeyPress("right", () => player1.changeDirection("right"));
 // Player 1 Move //
 
 // Player 2 Move //
-onKeyPress("up", () => player2.changeDirection("up"));
-onKeyPress("down", () => player2.changeDirection("down"));
-onKeyPress("left", () => player2.changeDirection("left"));
-onKeyPress("right", () => player2.changeDirection("right"));
+onKeyPress("w", () => player2.changeDirection("up"));
+onKeyPress("s", () => player2.changeDirection("down"));
+onKeyPress("a", () => player2.changeDirection("left"));
+onKeyPress("d", () => player2.changeDirection("right"));
 // Player 2 Move //
 
 let move_delay = 0.035; // The snake moves at a constant speed.
