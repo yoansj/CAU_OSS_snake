@@ -16,11 +16,11 @@ const directions = {
 const block_size = 15;
 
 const player1 = new Snake(directions.RIGHT, 3, "player1", block_size, {
-  x: block_size * 2,
+  x: block_size * 79,
   y: block_size * 14,
 });
 const player2 = new Snake(directions.LEFT, 3, "player2", block_size, {
-  x: block_size * 79,
+  x: block_size * 2,
   y: block_size * 14,
 });
 
