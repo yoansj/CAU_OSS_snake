@@ -192,17 +192,17 @@ function respawn_all() {
 respawn_all();
 
 // Player 1 Move //
-onKeyPress("up", () => player1.changeDirection("up"));
-onKeyPress("down", () => player1.changeDirection("down"));
-onKeyPress("left", () => player1.changeDirection("left"));
-onKeyPress("right", () => player1.changeDirection("right"));
+onKeyPress("w", () => player1.changeDirection("up"));
+onKeyPress("a", () => player1.changeDirection("down"));
+onKeyPress("s", () => player1.changeDirection("left"));
+onKeyPress("d", () => player1.changeDirection("right"));
 // Player 1 Move //
 
 // Player 2 Move //
-onKeyPress("w", () => player2.changeDirection("up"));
-onKeyPress("s", () => player2.changeDirection("down"));
-onKeyPress("a", () => player2.changeDirection("left"));
-onKeyPress("d", () => player2.changeDirection("right"));
+onKeyPress("up", () => player2.changeDirection("up"));
+onKeyPress("down", () => player2.changeDirection("down"));
+onKeyPress("left", () => player2.changeDirection("left"));
+onKeyPress("right", () => player2.changeDirection("right"));
 // Player 2 Move //
 
 let move_delay = 0.035; // The snake moves at a constant speed.
