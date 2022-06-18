@@ -11,6 +11,7 @@ const directions = {
 export default class Snake {
   constructor(direction, length, name, block_size) {
     // Snake member variables
+    this.past_direction = direction;
     this.current_direction = direction;
     this.length = length;
     this.body = [];
@@ -75,55 +76,51 @@ export default class Snake {
    */
   changeDirection(direction) {
     if (direction === directions.UP) {
-      if (this.current_direction != directions.DOWN) {
+      if (this.past_direction != directions.DOWN) {
         this.current_direction = directions.UP;
       }
-    }
-    if (direction === directions.DOWN) {
-      if (this.current_direction != directions.UP) {
+    } else if (direction === directions.DOWN) {
+      if (this.past_direction != directions.UP) {
         this.current_direction = directions.DOWN;
       }
-    }
-    if (direction === directions.LEFT) {
-      if (this.current_direction != directions.RIGHT) {
+    } else if (direction === directions.LEFT) {
+      if (this.past_direction != directions.RIGHT) {
         this.current_direction = directions.LEFT;
       }
-    }
-    if (direction === directions.RIGHT) {
-      if (this.current_direction != directions.LEFT) {
+    } else if (direction === directions.RIGHT) {
+      if (this.past_direction != directions.LEFT) {
         this.current_direction = directions.RIGHT;
       }
     }
   }
 
   autoMove(applePos, snakePos) {
-    console.log('apple x  = ', applePos.x);
-    console.log('apple y  = ', applePos.y);
-    console.log('snake x  = ', snakePos.x);
-    console.log('snake y  = ', snakePos.y);    
+    console.log("apple x  = ", applePos.x);
+    console.log("apple y  = ", applePos.y);
+    console.log("snake x  = ", snakePos.x);
+    console.log("snake y  = ", snakePos.y);
     if (applePos.x > snakePos.x) {
       if (!this.current_direction.LEFT) {
-        console.log('right');
+        console.log("right");
 
         this.changeDirection(directions.RIGHT);
       }
     }
     if (applePos.x < snakePos.x) {
       if (!this.current_direction.RIGHT) {
-        console.log('left');
+        console.log("left");
         this.changeDirection(directions.LEFT);
       }
     }
     if (applePos.y < snakePos.y) {
       if (!this.current_direction.DOWN) {
-        console.log('up');
+        console.log("up");
         this.changeDirection(directions.UP);
-
       }
     }
     if (applePos.y > snakePos.y) {
       if (!this.current_direction.UP) {
-        console.log('down');
+        console.log("down");
 
         this.changeDirection(directions.DOWN);
       }
@@ -133,15 +130,13 @@ export default class Snake {
   update(applePos) {
     if (!this.running) return;
     if (!this.spawned) return;
-    
 
     let snakePos = this.body[this.body.length - 1].pos;
-  
 
     // setTimeout(function(){
-      this.autoMove(applePos, snakePos);
+    this.autoMove(applePos, snakePos);
     // }.bind(this), 500);
-    
+
     let move_x = 0;
     let move_y = 0;
 
@@ -180,11 +175,13 @@ export default class Snake {
       let tail = this.body.shift();
       destroy(tail);
     }
+
+    this.past_direction = this.current_direction;
   }
 
   moveAuto() {
     // while (1) {
-    //   
+    //
     // }
   }
 }

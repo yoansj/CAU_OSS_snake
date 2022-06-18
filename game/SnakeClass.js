@@ -11,6 +11,7 @@ const directions = {
 export default class Snake {
   constructor(direction, length, name, block_size, pos) {
     // Snake member variables
+    this.past_direction = direction;
     this.current_direction = direction;
     this.length = length;
     this.body = [];
@@ -72,23 +73,20 @@ export default class Snake {
    * @param {String} direction
    */
   changeDirection(direction) {
-    if (direction === directions.UP) {
-      if (this.current_direction != directions.DOWN) {
+    if (direction == directions.UP) {
+      if (this.past_direction != directions.DOWN) {
         this.current_direction = directions.UP;
       }
-    }
-    if (direction === directions.DOWN) {
-      if (this.current_direction != directions.UP) {
+    } else if (direction === directions.DOWN) {
+      if (this.past_direction != directions.UP) {
         this.current_direction = directions.DOWN;
       }
-    }
-    if (direction === directions.LEFT) {
-      if (this.current_direction != directions.RIGHT) {
+    } else if (direction === directions.LEFT) {
+      if (this.past_direction != directions.RIGHT) {
         this.current_direction = directions.LEFT;
       }
-    }
-    if (direction === directions.RIGHT) {
-      if (this.current_direction != directions.LEFT) {
+    } else if (direction === directions.RIGHT) {
+      if (this.past_direction != directions.LEFT) {
         this.current_direction = directions.RIGHT;
       }
     }
@@ -136,5 +134,7 @@ export default class Snake {
       let tail = this.body.shift();
       destroy(tail);
     }
+
+    this.past_direction = this.current_direction;
   }
 }
