@@ -137,8 +137,14 @@ const saveGame = () => {
   localStorage.setItem(
     "cau-snake-save",
     JSON.stringify({
-      snake_length,
-      score: score.value,
+      player1_score: player1.score,
+      player1_currentDirection: player1.current_direction,
+      player1_name: player1.name,
+      player1_pos: player1.pos,
+      player2_score: player2.score,
+      player2_currentDirection: player2.current_direction,
+      player2_name: player2.name,
+      player2_pos: player2.pos,
     })
   );
   window.location.href = "/";
@@ -148,24 +154,29 @@ const loadGame = () => {
   const data = JSON.parse(localStorage.getItem("cau-snake-save"));
 
   if (data) {
-    // destroyAll("snake");
-    // score.value = data.score;
-    // snake_body = [];
-    // snake_length = data.snake_length;
-    // let mapCenter = block_size * 20;
-    // for (let i = 1; i <= snake_length; i++) {
-    //   let segment = add([
-    //     rect(block_size, block_size),
-    //     pos(mapCenter, mapCenter - block_size * i),
-    //     color(173, 216, 230),
-    //     area(),
-    //     "snake",
-    //   ]);
-    //   snake_body.push(segment);
-    // }
-    // current_direction = directions.UP;
-    // score.text = "Score:" + score.value;
-    // ! Agrandir le snake quand le jeu charge
+
+    player1.length = data.player1_score;
+    player1.current_direction = data.player1_currentDirection;
+    player1.name = data.player1_name;
+    player1.pos = data.player1_pos;
+    player2.length = data.player2_score;
+    player2.current_direction = data.player2_currentDirection;
+    player2.name = data.player2_name;
+    player2.pos = data.player2_pos
+
+    // Player 1 Move //
+    onKeyPress("up", () => player1.changeDirection("up"));
+    onKeyPress("down", () => player1.changeDirection("down"));
+    onKeyPress("left", () => player1.changeDirection("left"));
+    onKeyPress("right", () => player1.changeDirection("right"));
+    // Player 1 Move //
+
+    // Player 2 Move //
+    onKeyPress("w", () => player2.changeDirection("up"));
+    onKeyPress("s", () => player2.changeDirection("down"));
+    onKeyPress("a", () => player2.changeDirection("left"));
+    onKeyPress("d", () => player2.changeDirection("right"));
+    // Player 2 Move //
   }
 };
 
